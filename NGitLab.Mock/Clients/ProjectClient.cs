@@ -361,6 +361,11 @@ internal sealed class ProjectClient : ClientBase, IProjectClient
                 project.LfsEnabled = projectUpdate.LfsEnabled.Value;
             }
 
+            if (projectUpdate.GroupRunnersEnabled.HasValue)
+            {
+                project.GroupRunnersEnabled = projectUpdate.GroupRunnersEnabled.Value;
+            }
+
 #pragma warning disable CS0618 // Type or member is obsolete
             if (projectUpdate.TagList != null)
             {
@@ -403,5 +408,10 @@ internal sealed class ProjectClient : ClientBase, IProjectClient
     public GitLabCollectionResponse<Models.Project> GetForksAsync(string id, ForkedProjectQuery query)
     {
         return GitLabCollectionResponse.Create(GetForks(id, query));
+    }
+
+    public GitLabCollectionResponse<Models.Group> GetGroupsAsync(ProjectId projectId, ProjectGroupsQuery query)
+    {
+        throw new NotImplementedException();
     }
 }
